@@ -592,35 +592,79 @@ h3 {
 }
 
 /* ==========================================================
-   FIX GALERÍA EN MOBILE (< 769px)
-   El efecto "abanico" es solo de escritorio. Antes, en mobile
-   la Galería caía al mismo carrusel horizontal táctil que
-   Servicios/Reseñas y se desarmaba visualmente. Acá se la
-   pasa a un grid vertical de 1 columna (tarjetas apiladas),
-   sin tocar el carrusel de Servicios ni el de Reseñas.
+   GALERÍA EN MOBILE (< 769px)
+   Mismo efecto "abanico" que en escritorio (cartas encimadas
+   e inclinadas), pero con tarjetas más chicas para que las 4
+   entren en el ancho de la pantalla sin romperse. No toca el
+   carrusel de Servicios ni el de Reseñas.
    ========================================================== */
 @media (max-width: 768px) {
-  .gallery-section .showcase-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    overflow: visible;
-    scroll-snap-type: none;
-    gap: 16px;
-    padding: 4px 4px 6px;
-    margin: 0;
-  }
-
-  .gallery-section .showcase-card {
-    flex: none;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    margin-left: 0;
-    transform: none !important;
+  .gallery-section .showcase-wrap {
+    display: flex;
+    justify-content: center;
   }
 
   .gallery-section .showcase-arrow,
   .gallery-section .carousel-dots {
     display: none !important;
+  }
+
+  .gallery-section .showcase-grid {
+    display: flex;
+    grid-template-columns: unset;
+    overflow: visible;
+    scroll-snap-type: none;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0;
+    padding: 40px 10px 26px;
+    margin: 0;
+  }
+
+  .gallery-section .showcase-card {
+    flex: 0 0 128px;
+    width: 128px;
+    margin-left: -44px;
+    transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 420ms ease;
+    transform-origin: bottom center;
+  }
+
+  .gallery-section .showcase-card:first-child {
+    margin-left: 0;
+  }
+
+  .gallery-section .showcase-card:nth-child(1) {
+    transform: rotate(-9deg) translateY(13px);
+    z-index: 1;
+  }
+
+  .gallery-section .showcase-card:nth-child(2) {
+    transform: rotate(-3deg) translateY(2px);
+    z-index: 2;
+  }
+
+  .gallery-section .showcase-card:nth-child(3) {
+    transform: rotate(3deg) translateY(2px);
+    z-index: 3;
+  }
+
+  .gallery-section .showcase-card:nth-child(4) {
+    transform: rotate(9deg) translateY(13px);
+    z-index: 4;
+  }
+
+  .gallery-section .showcase-card:active {
+    transform: translateY(-18px) rotate(0deg) scale(1.05) !important;
+    z-index: 9 !important;
+    box-shadow: 0 30px 60px rgba(20, 15, 11, 0.4), 0 0 32px rgba(212, 163, 115, 0.2);
+  }
+}
+
+@media (max-width: 380px) {
+  .gallery-section .showcase-card {
+    flex: 0 0 104px;
+    width: 104px;
+    margin-left: -36px;
   }
 }
 
